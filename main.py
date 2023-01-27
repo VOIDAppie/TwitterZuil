@@ -3,6 +3,13 @@ from time import strftime
 from datetime import datetime
 import psycopg2
 
+
+# real time klok
+def klok():
+    tijd = strftime('%H:%M:%S')
+    tijd_label.config(text=tijd)
+    tijd_label.after(1000, klok)
+
 # Button Function
 def clear_textfields():
     bericht_is_verzonden.place_forget()
@@ -52,19 +59,11 @@ def save_data():
                        (naam, bericht, station, datum))
         con.commit()
 
-
-
     station_veld.delete(0, tkinter.END)
     naam_veld.delete(0, tkinter.END)
     bericht_veld.delete('1.0', tkinter.END)
     clear_textfields()
     bericht_is_verzonden.place(relx=0.4, rely=0.8, anchor=tkinter.W)
-
-# real time klok
-def klok():
-    tijd = strftime('%H:%M:%S')
-    tijd_label.config(text=tijd)
-    tijd_label.after(1000, klok)
 
 
 # NS kleurencodes
@@ -189,7 +188,5 @@ klok()
 
 con = psycopg2.connect(host='localhost', database='twitterzuil', user='postgres', password='postgres')
 cursor = con.cursor()
-
-
 
 root.mainloop()
