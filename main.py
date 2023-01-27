@@ -4,7 +4,7 @@ from datetime import datetime
 import psycopg2
 
 # Button Function
-def clear_alles():
+def clear_textfields():
     bericht_is_verzonden.place_forget()
     te_lang_label.place_forget()
     vul_station_bericht_in.place_forget()
@@ -13,7 +13,7 @@ def clear_alles():
     combi_te_lang.place_forget()
 
 
-def save_info():
+def save_data():
     station = station_veld.get()
     naam = naam_veld.get()
     bericht = bericht_veld.get('1.0', 'end-1c')
@@ -21,27 +21,27 @@ def save_info():
     datum = now.strftime('%Y-%m-%d')
 
     if len(station) > 255:
-        clear_alles()
+        clear_textfields()
         station_is_te_lang.place(relx=0.475, rely=0.41, anchor=tkinter.W)
         return None
 
     if len(naam) > 255:
-        clear_alles()
+        clear_textfields()
         naam_is_te_lang.place(relx=0.51, rely=0.41, anchor=tkinter.W)
         return None
 
     if station == '' or bericht == '':
-        clear_alles()
+        clear_textfields()
         vul_station_bericht_in.place(relx=0.475, rely=0.41, anchor=tkinter.W)
         return None
 
     if len(bericht) > 140:
-        clear_alles()
+        clear_textfields()
         te_lang_label.place(relx=0.41, rely=0.41, anchor=tkinter.W)
         return None
 
     if (len(bericht) + len(station) + len(naam) + 2) > 140:
-        clear_alles()
+        clear_textfields()
         combi_te_lang.place(relx=0.34, rely=0.41, anchor=tkinter.W)
         return None
 
@@ -57,21 +57,21 @@ def save_info():
     station_veld.delete(0, tkinter.END)
     naam_veld.delete(0, tkinter.END)
     bericht_veld.delete('1.0', tkinter.END)
-    clear_alles()
+    clear_textfields()
     bericht_is_verzonden.place(relx=0.4, rely=0.8, anchor=tkinter.W)
 
-
+# real time klok
 def klok():
     tijd = strftime('%H:%M:%S')
     tijd_label.config(text=tijd)
     tijd_label.after(1000, klok)
 
 
-# Kleuren
+# NS kleurencodes
 ns_geel = '#ffc72c'
 ns_blauw = '#002d72'
 
-# Root Scherm
+# Tkinter root scherm
 root = tkinter.Tk()
 root.resizable(False, False)
 root['background'] = ns_geel
@@ -79,7 +79,7 @@ root.geometry('960x540')
 root.title('Twitter Zuil')
 # root.iconbitmap('ns_logo.ico')
 
-# Titel
+# Header
 title = tkinter.Label(root)
 title.configure(text='Twitter Zuil', font=('Calibri', 72))
 title['background'] = ns_geel
@@ -97,7 +97,7 @@ station_label.configure(text='Station: ', font=('Calibri', 14, 'bold'))
 station_label['background'] = ns_geel
 station_label['foreground'] = ns_blauw
 
-# Station Veld
+# Station textfield
 station_veld = tkinter.Entry(station_frame)
 station_veld.configure(width=30)
 
@@ -115,7 +115,7 @@ naam_label.configure(text='Naam (optioneel): ', font=('Calibri', 14, 'bold'))
 naam_label['background'] = ns_geel
 naam_label['foreground'] = ns_blauw
 
-# Naam Veld
+# Naam textfield
 naam_veld = tkinter.Entry(naam_frame)
 naam_veld.configure(width=30)
 
@@ -173,7 +173,7 @@ bericht_veld.place(relx=0.2, rely=0.530, anchor=tkinter.W)
 bericht_frame.place(relx=0.2, rely=0.41, anchor=tkinter.W)
 
 # Verzendknop
-verzend_knop = tkinter.Button(root, command=save_info)
+verzend_knop = tkinter.Button(root, command=save_data)
 verzend_knop.configure(text='verzend', font=('Calibri', 14, 'bold'))
 verzend_knop['background'] = ns_blauw
 verzend_knop['foreground'] = 'white'
