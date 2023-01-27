@@ -3,9 +3,6 @@ from time import strftime
 from datetime import datetime
 import psycopg2
 
-
-
-
 # Button Function
 def clear_alles():
     bericht_is_verzonden.place_forget()
