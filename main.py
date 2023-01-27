@@ -14,7 +14,7 @@ def klok():
 def clear_textfields():
     bericht_is_verzonden.place_forget()
     te_lang_label.place_forget()
-    vul_station_bericht_in.place_forget()
+    vul_station_bericht_in.pla1000ce_forget()
     station_is_te_lang.place_forget()
     naam_is_te_lang.place_forget()
     combi_te_lang.place_forget()
@@ -186,7 +186,7 @@ klok()
 
 # Database koppeling
 
-con = psycopg2.connect(host='localhost', database='twitterzuil', user='postgres', password='postgres')
+con = psycopg2.connect(host='localhost', port=15432, database='zuil', user='zuil', password='zuil')
 cursor = con.cursor()
 
 root.mainloop()
