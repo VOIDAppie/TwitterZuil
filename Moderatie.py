@@ -62,7 +62,7 @@ def bericht_opslaan():
 
     cursor.execute('SELECT * FROM klant WHERE status IS NULL LIMIT 1')
     rows = cursor.fetchall()
-    klant_id = rows[0][0]
+    klant_id = rows[0][5]
     value = rad_btn_status.get()
 
     if value == 1:

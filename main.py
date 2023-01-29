@@ -14,7 +14,7 @@ def klok():
 def clear_textfields():
     bericht_verzonden.place_forget()
     te_lang_label.place_forget()
-    vul_station_bericht_in.pla1000ce_forget()
+    vul_station_bericht_in.place_forget()
     station_te_lang_exception.place_forget()
     naam_te_lang_exception.place_forget()
     combi_te_lang_exception.place_forget()
@@ -24,6 +24,7 @@ def save_data():
     station = station_veld.get()
     naam = naam_veld.get()
     bericht = bericht_veld.get('1.0', 'end-1c')
+    status = None
     now = datetime.now()
     datum = now.strftime('%Y-%m-%d')
 
@@ -55,9 +56,9 @@ def save_data():
     if naam == '':
         naam = '(anoniem)'
 
-        cursor.execute('INSERT INTO klant(naam, bericht, station, datum) VALUES(%s, %s, %s, %s)',
-                       (naam, bericht, station, datum))
-        con.commit()
+    cursor.execute('INSERT INTO klant(naam, bericht, station, datum, status) VALUES(%s, %s, %s, %s, %s)',
+                   (naam, bericht, station, datum, status))
+    con.commit()
 
     station_veld.delete(0, tkinter.END)
     naam_veld.delete(0, tkinter.END)
