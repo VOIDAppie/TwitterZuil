@@ -1,11 +1,32 @@
+import random
 import tkinter
 from time import strftime
 from datetime import datetime
 import psycopg2
+from random import randint
 
+#Faciliteiten data
+faciliteiten = {
+    "Utrecht": " - Trams werken niet\n - Bussen zitten overvol\n - Als je wil mag je lopen",
+    "Amsterdam": " - Treinen vertrekken te vroeg\n - Het station is te groot\n - Kom maar naar Utrecht",
+    "Hilversum": " - OV-Fiets\n - OV-Auto"
+}
+
+print(list(faciliteiten.items())[0])
+
+teller = 2
 
 # real time klok
 def klok():
+    global teller
+    if teller == 0:
+        faciliteiten_veld.delete(1.0, tkinter.END)
+        tekst = f'{list(faciliteiten.items())[randint(0, 2)][0]}\n{list(faciliteiten.items())[randint(0, 2)][1]}'
+        faciliteiten_veld.insert(1.0, tekst)
+        teller = 2
+
+    teller -= 1
+
     tijd = strftime('%H:%M:%S')
     tijd_label.config(text=tijd)
     tijd_label.after(1000, klok)
@@ -166,7 +187,7 @@ combi_te_lang_exception['foreground'] = 'red'
 
 # Bericht veld
 bericht_veld = tkinter.Text(root)
-bericht_veld.configure(width=70, height=5, font=('Calibri', 12))
+bericht_veld.configure(width=50, height=5, font=('Calibri', 12))
 
 bericht_label.pack(side=tkinter.LEFT)
 bericht_veld.place(relx=0.2, rely=0.530, anchor=tkinter.W)
@@ -177,6 +198,20 @@ verzend_knop = tkinter.Button(root, command=save_data)
 verzend_knop.configure(text='verzend', font=('Calibri', 14, 'bold'))
 verzend_knop['background'] = ns_blauw
 verzend_knop['foreground'] = 'white'
+
+#Faciliteiten
+
+#Faciliteiten label
+faciliteiten_label = tkinter.Label(root)
+faciliteiten_label.configure(text='Faciliteiten:', font=('Calibri', 14))
+faciliteiten_label['foreground'] = ns_blauw
+faciliteiten_label['background'] = ns_geel
+faciliteiten_label.place(relx=0.95, rely=0.25, anchor=tkinter.E)
+
+#Faciliteiten veld
+faciliteiten_veld = tkinter.Text(root)
+faciliteiten_veld.configure(font=('Calibri', 12), width=20, height=15)
+faciliteiten_veld.place(relx=0.99, rely=0.5, anchor=tkinter.E)
 
 verzend_knop.place(relx=0.5, rely=0.7, anchor=tkinter.CENTER)
 
