@@ -12,12 +12,12 @@ def klok():
 
 # Button Function
 def clear_textfields():
-    bericht_is_verzonden.place_forget()
+    bericht_verzonden.place_forget()
     te_lang_label.place_forget()
     vul_station_bericht_in.pla1000ce_forget()
-    station_is_te_lang.place_forget()
-    naam_is_te_lang.place_forget()
-    combi_te_lang.place_forget()
+    station_te_lang_exception.place_forget()
+    naam_te_lang_exception.place_forget()
+    combi_te_lang_exception.place_forget()
 
 
 def save_data():
@@ -29,12 +29,12 @@ def save_data():
 
     if len(station) > 255:
         clear_textfields()
-        station_is_te_lang.place(relx=0.475, rely=0.41, anchor=tkinter.W)
+        station_te_lang_exception.place(relx=0.475, rely=0.41, anchor=tkinter.W)
         return None
 
     if len(naam) > 255:
         clear_textfields()
-        naam_is_te_lang.place(relx=0.51, rely=0.41, anchor=tkinter.W)
+        naam_te_lang_exception.place(relx=0.51, rely=0.41, anchor=tkinter.W)
         return None
 
     if station == '' or bericht == '':
@@ -49,7 +49,7 @@ def save_data():
 
     if (len(bericht) + len(station) + len(naam) + 2) > 140:
         clear_textfields()
-        combi_te_lang.place(relx=0.34, rely=0.41, anchor=tkinter.W)
+        combi_te_lang_exception.place(relx=0.34, rely=0.41, anchor=tkinter.W)
         return None
 
     if naam == '':
@@ -63,7 +63,7 @@ def save_data():
     naam_veld.delete(0, tkinter.END)
     bericht_veld.delete('1.0', tkinter.END)
     clear_textfields()
-    bericht_is_verzonden.place(relx=0.4, rely=0.8, anchor=tkinter.W)
+    bericht_verzonden.place(relx=0.4, rely=0.8, anchor=tkinter.W)
 
 
 # NS kleurencodes
@@ -75,12 +75,12 @@ root = tkinter.Tk()
 root.resizable(False, False)
 root['background'] = ns_geel
 root.geometry('960x540')
-root.title('Twitter Zuil')
+root.title('NS Berichtenzuil')
 # root.iconbitmap('ns_logo.ico')
 
 # Header
 title = tkinter.Label(root)
-title.configure(text='Twitter Zuil', font=('Calibri', 72))
+title.configure(text='NS Berichtenzuil', font=('Calibri', 72))
 title['background'] = ns_geel
 title['foreground'] = ns_blauw
 
@@ -92,7 +92,7 @@ station_frame['background'] = ns_geel
 
 # Station Label
 station_label = tkinter.Label(station_frame)
-station_label.configure(text='Station: ', font=('Calibri', 14, 'bold'))
+station_label.configure(text='*Station: ', font=('Calibri', 14, 'bold'))
 station_label['background'] = ns_geel
 station_label['foreground'] = ns_blauw
 
@@ -128,7 +128,7 @@ bericht_frame['background'] = ns_geel
 
 # Bericht Label
 bericht_label = tkinter.Label(bericht_frame)
-bericht_label.configure(text='Bericht: ', font=('Calibri', 14, 'bold'))
+bericht_label.configure(text='*Bericht: ', font=('Calibri', 14, 'bold'))
 bericht_label['background'] = ns_geel
 bericht_label['foreground'] = ns_blauw
 
@@ -143,25 +143,25 @@ vul_station_bericht_in.configure(text='STATION OF BERICHT MIST! (verplicht)', fo
 vul_station_bericht_in['background'] = ns_geel
 vul_station_bericht_in['foreground'] = 'red'
 
-bericht_is_verzonden = tkinter.Label(root)
-bericht_is_verzonden.configure(text='Uw bericht is verzonden...', font=('Calibri', 14, 'bold'))
-bericht_is_verzonden['background'] = ns_geel
-bericht_is_verzonden['foreground'] = ns_blauw
+bericht_verzonden = tkinter.Label(root)
+bericht_verzonden.configure(text='Uw bericht is verzonden...', font=('Calibri', 14, 'bold'))
+bericht_verzonden['background'] = ns_geel
+bericht_verzonden['foreground'] = ns_blauw
 
-station_is_te_lang = tkinter.Label(root)
-station_is_te_lang.configure(text='HET INGEVULDE STATION IS TE LANG!', font=('Calibri', 14))
-station_is_te_lang['background'] = ns_geel
-station_is_te_lang['foreground'] = 'red'
+station_te_lang_exception = tkinter.Label(root)
+station_te_lang_exception.configure(text='HET INGEVULDE STATION IS TE LANG!', font=('Calibri', 14))
+station_te_lang_exception['background'] = ns_geel
+station_te_lang_exception['foreground'] = 'red'
 
-naam_is_te_lang = tkinter.Label(root)
-naam_is_te_lang.configure(text='DE INGEVULDE NAAM IS TE LANG!', font=('Calibri', 14))
-naam_is_te_lang['background'] = ns_geel
-naam_is_te_lang['foreground'] = 'red'
+naam_te_lang_exception = tkinter.Label(root)
+naam_te_lang_exception.configure(text='DE INGEVULDE NAAM IS TE LANG!', font=('Calibri', 14))
+naam_te_lang_exception['background'] = ns_geel
+naam_te_lang_exception['foreground'] = 'red'
 
-combi_te_lang = tkinter.Label(root)
-combi_te_lang.configure(text='UW BERICHT NAAM STATION COMBINATIE IS TE LANG!', font=('Calibri', 14))
-combi_te_lang['background'] = ns_geel
-combi_te_lang['foreground'] = 'red'
+combi_te_lang_exception = tkinter.Label(root)
+combi_te_lang_exception.configure(text='UW BERICHT NAAM STATION COMBINATIE IS TE LANG!', font=('Calibri', 14))
+combi_te_lang_exception['background'] = ns_geel
+combi_te_lang_exception['foreground'] = 'red'
 
 # Bericht veld
 bericht_veld = tkinter.Text(root)
